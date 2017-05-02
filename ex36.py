@@ -13,6 +13,7 @@ def room_1():
         else:
             print confusion()
 
+
 def room_2():
     print "You are now in room two!"
     print "Is this room cool or fun?"
@@ -48,3 +49,4 @@ def confusion():
     return "I don't know what that means, dude."
 
 start_room()
+# Test commit
