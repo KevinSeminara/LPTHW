@@ -57,7 +57,27 @@ class CentralCorridor(Scene):
 class LaserWeaponArmory(Scene):
 
     def enter(self):
-        pass
+        print "You are now in the Laser Weapon Armory!"
+        print "There is a bomb"
+        print "You only have 10 guesses"
+        code = "%d%d%d" % (randint(1,9), randint(1,9), randint(1,9))
+        guess = raw_input("[keypad]> ")
+        guesses = 0
+
+        while guess != code and guesses <10:
+            print "WRONG!"
+            guesses += 1
+            guess = raw_input("[keypad]> ")
+
+        if guess == code:
+            print "Wow you guessed the code"
+            print "You can proceed!"
+            return 'the_bridge'
+        else:
+            print "The bomb explodes and you are dead"
+            return 'death'
+
+
 
 class TheBridge(Scene):
 
