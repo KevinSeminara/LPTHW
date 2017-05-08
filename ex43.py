@@ -24,7 +24,7 @@ class Engine(object):
         current_scene.enter()
 
 
-def Death(Scene):
+class Death(Scene):
 
     quips = [
         "You died. Sorry!",
@@ -64,42 +64,87 @@ class LaserWeaponArmory(Scene):
         guess = raw_input("[keypad]> ")
         guesses = 0
 
-        while guess != code and guesses <10:
+        while guesses <10 :
             print "WRONG!"
             guesses += 1
             guess = raw_input("[keypad]> ")
 
-        if guess == code:
-            print "Wow you guessed the code"
-            print "You can proceed!"
-            return 'the_bridge'
-        else:
-            print "The bomb explodes and you are dead"
-            return 'death'
+            if guess == code:
+                print "Wow you guessed the code"
+                print "You can proceed!"
+                return 'the_bridge'
+            elif guess == "hint":
+                print code
+            else:
+                print "The bomb explodes and you are dead"
+                return 'death'
 
 
 
 class TheBridge(Scene):
 
     def enter(self):
-        pass
+        print "You are now on The Bridge!"
+        print "There is a bomb! oh no!"
+
+        action = raw_input("> ")
+
+        if action == "throw the bomb":
+            print "it goes off"
+            return 'death'
+        elif action == "slowly place the bomb":
+            print "It worked!"
+            print "Now we can leave!"
+            return 'escape_pod'
+        else:
+            print "DOES NOT COMPUTE"
+            return 'the_bridge'
+
 
 class EscapePod(Scene):
 
     def enter(self):
-        pass
+        print "You are now surrounded by escape pods"
+        print "There are 5 escape pods"
+        print "Which one do you take"
 
+        good_pod = randint(1, 5)
+        guess = raw_input("[pod #]> ")
+
+        if guess != good_pod:
+            print "You chose pod %s" % guess
+            print "That pod exploded!"
+            return 'death'
+        elif guess == "hint":
+            print good_pod
+        else:
+            print "You've escaped and won!"
+            return 'finished'
+class Finished(Scene):
+
+    def enter(self):
+        print "You are the best!!!!!!!!!"
 
 class Map(object):
 
+    scenes = {
+        'central_corridor': CentralCorridor(),
+        'laser_weapon_armory': LaserWeaponArmory(),
+        'the_bridge': TheBridge(),
+        'escape_pod': EscapePod(),
+        'death': Death(),
+        'finished': Finished(),
+    }
+
     def __init__(self, start_scene):
-        pass
+        self.start_scene = start_scene
 
     def next_scene(self, scene_name):
-        pass
+        val = Map.scenes.get(scene_name)
+        return val
 
     def opening_scene(self):
-        pass
+        return self.next_scene(self.start_scene)
 
 a_map = Map('central_corridor')
 a_game= Engine(a_map)
