@@ -5,12 +5,8 @@ letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 inputword = raw_input('Enter word> ')
 #inputguess = raw_input('Enter guess> ')
-totalcounter = 0
 rightcounter = 0
-fullmatch = False
-lettermatch = False
 
-inputlist = list(inputword)
 guesslist = []
 printlist = []
 
