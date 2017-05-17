@@ -1,7 +1,7 @@
 import random
 import time
 
-letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_'
 
 inputword = raw_input('Enter word> ')
 #inputguess = raw_input('Enter guess> ')
@@ -24,7 +24,7 @@ while rightcounter < len(inputword):
         print ''.join(guesslist)
     else:
         print ''.join(printlist) + ''.join(guesslist[rightcounter:])
-    time.sleep(.030)
+    time.sleep(.015)
 
 
 
